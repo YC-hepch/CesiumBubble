@@ -1,0 +1,53 @@
+.supermap-cesium-popup {
+   position:absolute;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border: 2px solid rgba(36, 35, 35, 0);
+    box-shadow: -3px -5px 5px 2px rgba(133, 131, 131, 0.2);
+    z-index: 9999999;
+
+}
+.popup-close {
+    float: right;
+    margin-right: 10px;
+}
+.supermapcesium-popup-content {
+    margin-top: 25px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    min-width: 100px;
+    max-width: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.supermap-cesium-popup ::after {
+    content: '';
+    width: 0;
+    height: 0;
+    border: 20px solid;
+    top: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    border-color: rgb(255, 255, 255) transparent transparent;
+    z-index: 999999;
+}
+.popup-footer {
+    margin-top: 10px;
+}
+.supermapcesium-popup-content::-webkit-scrollbar {
+    width: 5px;
+    height: 0px;
+}
+.supermapcesium-popup-content::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 5px rgba(15, 15, 15, 0.2);
+    background: #a7a5a5;
+}
+.supermapcesium-popup-content::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(235, 235, 235, 0.2);
+    border-radius: 10px;
+    background: #ecebeb;
+}

@@ -1,0 +1,66 @@
+<!--
+ * @Descripttion: file content
+ * @version: 1.0
+ * @Author: 予程_hepch
+ * @Date: 2022-02-21 17:39:45
+ * @LastEditors: 予程_hepch
+ * @LastEditTime: 2022-09-14 18:13:00
+ * @Copyright: 超图软件华中平台客户中心 (SuperMap Software Co., Ltd. -Central China Platform)
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble</title>
+    <!-- 构建页面的css样式文件 -->
+    <link rel="stylesheet" href="./css/popup.css" />
+    <!--cesuim库、样式文件 建议下载到本地，引入本地资源  -->
+    <link href="http://www.supermapol.com/earth/static/Cesium/Widgets/widgets.css" rel="stylesheet" />
+</head>
+<style>
+
+</style>
+
+<body>
+    <div id="mapViewer"></div>
+    <script src="http://www.supermapol.com/earth/static/Cesium/Cesium.js"></script>
+    <script src="./js/Bubble.js"></script>
+    <!--jquery库文件 建议下载到本地，引入本地资源  -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script>
+        window.viewer = new Cesium.Viewer("mapViewer", {
+            infoBox: false,
+            contextOptions: {
+          maxDrawingButterWidth: window.innerWidth,
+          maxDrawingBufferHeight: window.innerHeight,
+          msaaLevel: 16,
+          requestWebgl2: true,
+        },
+        });
+        var scene = window.viewer.scene;
+        var popup = new Popup(viewer, {
+            maxWidth: 300,
+            minWidth: 300,
+            maxHeight: 300
+        });
+        var promise = window.viewer.scene.open("http://www.supermapol.com/realspace/services/3D-suofeiya_church/rest/realspace");
+        Cesium.when(promise, function (layers) {
+            var handler = new Cesium.ScreenSpaceEventHandler(scene.canvas);
+            handler.setInputAction(function (e) {
+                // 获取点击位置笛卡尔坐标
+                var position = scene.pickPosition(e.position);
+                if (!position) {
+                    position = Cesium.Cartesian3.fromDegrees(0, 0, 0);
+                }
+                var content = "<p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul><p>属性html</p><ul><li>1</li><li>2</li><li>3</li></ul>"
+               //传入位置笛卡尔坐标  和内同html            
+                popup.showInfo(content, position)
+            }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+        })
+    </script>
+</body>
+
+</html>
